@@ -19,3 +19,10 @@ def trim_silence(y, top_db=20):
 
 def pre_emphasis(y, coeff=0.97):
     return np.append(y[0], y[1:] - coeff * y[:-1])
+
+def noise_reduction_simple(y, sr, cutoff=7000):
+    nyq = 0.5 * sr
+    norm_cutoff = cutoff / nyq
+    b, a = scipy.signal.butter(6, norm_cutoff, btype='low')
+    y_filt = scipy.signal.filtfilt(b, a, y)
+    return y_filt

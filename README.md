@@ -24,6 +24,12 @@ An open-source data preprocessing library for different types of data, such as i
   - Convert images to grayscale
   - Rotate images by a given angle
   - Apply a simple Gaussian blur
+- **audio**
+  - volume normalization
+  - silence trimming
+  - pre-emphasis filter
+  - simple noise reduction
+
 
 > Other data types (text, audio, video, etc.) can be added by other teammates.
 

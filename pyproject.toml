@@ -15,6 +15,6 @@ dependencies = [
   "soundfile",
   "scipy",
   "Pillow",
-  "soundfile"
+  "soundfile",
   "scipy"
 ]

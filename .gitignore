@@ -1,0 +1,15 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# OS/IDE artifacts
+.DS_Store
+Thumbs.db
+
+# Demo outputs and test artifacts
+examples/output/
+results/

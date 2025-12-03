@@ -16,3 +16,6 @@ def normalize_audio(y):
 def trim_silence(y, top_db=20):
     trimmed, _ = librosa.effects.trim(y, top_db=top_db)
     return trimmed
+
+def pre_emphasis(y, coeff=0.97):
+    return np.append(y[0], y[1:] - coeff * y[:-1])

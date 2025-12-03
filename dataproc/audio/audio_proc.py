@@ -26,3 +26,20 @@ def noise_reduction_simple(y, sr, cutoff=7000):
     b, a = scipy.signal.butter(6, norm_cutoff, btype='low')
     y_filt = scipy.signal.filtfilt(b, a, y)
     return y_filt
+
+def preprocess_basic(path,
+                     sr=16000,
+                     top_db=20,
+                     pre_emphasis_coeff=0.97,
+                     noise_cutoff=7000):
+    y, sr = load_audio(path, sr=sr)
+
+    y = trim_silence(y, top_db=top_db)
+
+    y = pre_emphasis(y, coeff=pre_emphasis_coeff)
+
+    y = noise_reduction_simple(y, sr, cutoff=noise_cutoff)
+
+    y = normalize_audio(y)
+
+    return y, sr

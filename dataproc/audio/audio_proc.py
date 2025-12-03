@@ -10,3 +10,6 @@ def load_audio(path, sr=16000):
     y, sr = librosa.load(path, sr=sr)
     return y, sr
 
+def normalize_audio(y):
+    return librosa.util.normalize(y)
+

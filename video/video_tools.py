@@ -79,3 +79,16 @@ def to_grayscale(input_path, output_path):
     )
     clip.close()
     gray_clip.close()
+
+# 改变速度 speed
+def change_speed(input_path, output_path, factor):
+    clip = VideoFileClip(input_path)
+    speed_clip = clip.with_effects([MultiplySpeed(factor=factor)])
+    speed_clip.write_videofile(
+        output_path,
+        codec="libx264",
+        audio_codec="aac",
+        ffmpeg_params=["-pix_fmt", "yuv420p"],
+    )
+    clip.close()
+    speed_clip.close()

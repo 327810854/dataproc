@@ -67,3 +67,15 @@ def resize_to_resolution(input_path, output_path, target_w, target_h):
 
     clip.close()
     new_clip.close()
+# 变成黑白   black white
+def to_grayscale(input_path, output_path):
+    clip = VideoFileClip(input_path)
+    gray_clip = clip.with_effects([BlackAndWhite()])
+    gray_clip.write_videofile(
+        output_path,
+        codec="libx264",
+        audio_codec="aac",
+        ffmpeg_params=["-pix_fmt", "yuv420p"],
+    )
+    clip.close()
+    gray_clip.close()

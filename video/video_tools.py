@@ -92,3 +92,37 @@ def change_speed(input_path, output_path, factor):
     )
     clip.close()
     speed_clip.close()
+# 添加水印 watermark
+def add_watermark(input_path, output_path, text="OSS TEAM", fontsize=30, position="bottom-right"):
+    clip = VideoFileClip(input_path)
+
+    pos_map = {
+        "top-left": ("left", "top"),
+        "top-right": ("right", "top"),
+        "bottom-left": ("left", "bottom"),
+        "bottom-right": ("right", "bottom"),
+        "center": ("center", "center"),
+    }
+    pos = pos_map.get(position, ("right", "bottom"))
+
+    txt = TextClip(
+        text=text,
+        font_size=fontsize,
+        color="white",
+    ).with_duration(clip.duration)
+
+    result = CompositeVideoClip(
+        [clip, txt.with_position(pos)],
+        size=clip.size,
+    )
+
+    result.write_videofile(
+        output_path,
+        codec="libx264",
+        audio_codec="aac",
+        ffmpeg_params=["-pix_fmt", "yuv420p"],
+    )
+
+    clip.close()
+    txt.close()
+    result.close()

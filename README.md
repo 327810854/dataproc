@@ -42,13 +42,17 @@ cd dataproc
 
 ```bash
 python -m venv .venv
-.\.venv\Scripts\activate
+\.\.venv\Scripts\activate
 ```
 
-3. Install dependencies:
+3. Install dependencies (choose one):
 
 ```bash
+# Option A: install from requirements.txt
 pip install -r requirements.txt
+
+# Option B: install the package via pyproject.toml
+pip install .
 ```
 
 ## Usage: Image preprocessing

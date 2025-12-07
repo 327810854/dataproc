@@ -13,3 +13,7 @@ Thumbs.db
 # Demo outputs and test artifacts
 examples/output/
 results/
+outputs/
+examples/input.jpg
+input.jpg
+*.egg-info/

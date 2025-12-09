@@ -12,7 +12,7 @@ def save_csv(df: pd.DataFrame, out_path: str, index: bool = False) -> None:
     """
     Save a pandas DataFrame to CSV. Create parent folder if necessary.
     """
-    Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(out_path).parent.mkdir(parents=True, exist_ok=True) 
     df.to_csv(out_path, index=index)
 
 def drop_empty(df: pd.DataFrame, how: str = 'any') -> pd.DataFrame:
@@ -31,12 +31,16 @@ def fill_empty(df: pd.DataFrame, value=None, method: Optional[str]=None) -> pd.D
         return df.fillna(method=method)
     else:
         return df.fillna(value)
-    def drop_duplicates(df, subset=None):
-        """
-        Remove duplicate rows. 
-        subset:
-        list of columns to consider, or None for all columns.
-        """
+def drop_duplicates(df: pd.DataFrame, subset: Optional[List[str]] = None) -> pd.DataFrame:
+    """
+    Remove duplicate rows and keep only one row for each duplicate group.
+    
+    Parameters:
+    - subset: list of columns to check for duplicates.
+              If None, all columns are used.
+              
+    Keeps the first occurrence and removes the rest.
+    """
     return df.drop_duplicates(subset=subset, keep='first')
 
 def keep_columns(df, columns):

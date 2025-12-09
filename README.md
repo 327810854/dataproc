@@ -3,90 +3,116 @@
 Project structure
 
 dataproc/
-├── dataproc/
-│   ├── __init__.py
-│   ├──audio/
-│   │   ├──__init__.py
-│   │   └──audio_proc.py 
-│   └── images/
-│       ├── __init__.py
-│       └── preprocess.py
-├── examples/
-│   └── image_demo.py
-├── requirements.txt
-└── README.md
+ ├── video/
+ │    ├── video_tools.py
+ │    └── __init__.py
+ ├── image/
+ ├── data/
+ ├── examples/
+ │    ├── sample.mp4
+ │    └── output_demo.mp4
+ ├── tests/
+ │    └── test_video.py
+ ├── README.md
+ └── requirements.txt
+
 # dataproc
 
-An open-source data preprocessing library for different types of data, such as images, text, audio, and more. This project is part of a course assignment and is intended to practice open-source collaboration on GitHub.
+Dataproc is a lightweight Python data & media processing toolkit developed for the AI Practice (OSS) course.
+The project follows Git/GitHub workflows including branching, issue tracking, pull requests, and collaborative development.
+This repository contains multiple functional modules, including video processing, image tools, and additional data utilities.
 
 ## Features (current status)
 
-- **Images**
-  - Open and save images
-  - Resize images
-  - Convert images to grayscale
-  - Rotate images by a given angle
-  - Apply a simple Gaussian blur
-- **audio**
-  - volume normalization
-  - silence trimming
-  - pre-emphasis filter
-  - simple noise reduction
+Video Processing Module (Jdz1128)
 
+Provides essential video editing utilities such as:
 
-> Other data types (text, audio, video, etc.) can be added by other teammates.
+Cut video clips
+
+Resize videos (scale factor or resolution)
+
+Convert to grayscale
+
+Change playback speed
+
+Add watermark (image/text)
+
+All functions are implemented using Python and MoviePy.
 
 ## Installation
 
-It is recommended to use Python 3.10+.
-
-1. Clone the repository:
-
-```bash
 git clone https://github.com/327810854/dataproc.git
 cd dataproc
-```
-
-2. Create and activate a virtual environment (Windows):
-
-```bash
-python -m venv .venv
-.\.venv\Scripts\activate
-```
-
-3. Install dependencies:
-
-```bash
 pip install -r requirements.txt
-```
+
+
 
 ## Usage: Image preprocessing
 
-Here is a simple example of how to use the image preprocessing utilities:
+Import the module
+      from video.video_tools import (
+    cut_clip,
+    resize_video,
+    resize_to_resolution,
+    to_grayscale,
+    change_speed,
+    add_watermark,
+      )
 
-```python
-from dataproc.images import preprocess
+1) Cut a video clip
+Function:
+cut_clip(input_path, output_path, start, end)
 
-# Resize an image
-preprocess.resize_image("input.jpg", "output_resized.jpg", (256, 256))
+Parameters:
+input_path: input video file
+output_path: output file
+start: start time (seconds)
+end: end time (seconds)
 
-# Convert to grayscale
-preprocess.to_grayscale("input.jpg", "output_gray.jpg")
+Example
+cut_clip("sample.mp4", "clip.mp4", start=3, end=10)
 
-# Rotate an image by 45 degrees
-preprocess.rotate_image("input.jpg", "output_rotated.jpg", angle=45)
+2) Resize a video by scale factor
+Function:
+resize_video(input_path, output_path, factor)
 
-# Apply a blur effect
-preprocess.blur_image("input.jpg", "output_blur.jpg", radius=3.0)
-```
+Example:
+resize_video("sample.mp4", "small.mp4", factor=0.5)
 
-You can also run the example script:
+3) Resize to specific resolution
+Function:
+resize_to_resolution(input_path, output_path, width, height)
 
-```bash
-python -m examples.image_demo
-```
+Example:
+resize_to_resolution("sample.mp4", "1080p.mp4", 1920, 1080)
 
-This will generate several processed images under `examples/output`.
+4) Convert to grayscale
+Function:
+to_grayscale(input_path, output_path)
+
+Example:
+to_grayscale("sample.mp4", "gray.mp4")
+
+5) Change playback speed
+Function:
+change_speed(input_path, output_path, factor)
+
+Example:
+change_speed("sample.mp4", "fast.mp4", factor=2.0)   # 2x faster
+change_speed("sample.mp4", "slow.mp4", factor=0.5)   # 0.5x slower
+
+6) Add watermark (image or text)
+Function:
+add_watermark(input_path, output_path, watermark_path, pos=("right","bottom"))
+
+Example:
+add_watermark(
+    "sample.mp4",
+    "wm.mp4",
+    watermark_path="logo.png",
+    pos=("right", "bottom")
+)
 
 ## Development workflow (for contributors)
 
